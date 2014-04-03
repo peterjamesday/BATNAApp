@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     else
      
        respond_to do |format|
-              format.json { render :json => @user.errors, :status => 500 }
+              format.json { render :json => {:error => "Invalid email or password."} }
        end
 
     end

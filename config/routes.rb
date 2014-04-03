@@ -2,8 +2,10 @@ BatnaApp::Application.routes.draw do
   root :to => "static_pages#index"
 
   get "/negotiations/retrievenegotiations" => "negotiations#retrieve_negotiations"
+  get "/issues/retrieveissues" => "issues#retrieve_issues"
 
   post "/negotiations/newnegotiation" => "negotiations#new_negotiation"
+  post "/issues/newissue" => "issues#new_issue"
 
   match 'login'  => 'sessions#new', :via => :get
   match 'logout' => 'sessions#destroy', :via => [:get, :delete]

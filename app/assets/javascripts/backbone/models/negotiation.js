@@ -4,7 +4,10 @@ var Negotiation = Backbone.Model.extend({
 
   defaults: {
   	"completed": false,
-  	"final_score": 0
+  	"final_score": 0,
+    "negotiation_name":"untitled",
+    "batna_name": "untitled",
+    "batna_points": 0
   }
   
 });
@@ -16,17 +19,8 @@ var Negotiations = Backbone.Collection.extend({
 
   initialize: function(){
   	
-  	this.fetch({
-  		success: function(collection, response, options){
-  			
-  		var negotiationListView = new NegotiationListView({collection: response});
-  		
-  		}
-  	});
+  	this.fetch();
   	
-  },
-
-  parse: function(response){
-
   }
+
 });

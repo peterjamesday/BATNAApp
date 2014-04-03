@@ -55,9 +55,8 @@ $(document).ready(function () {
   
   Router.route(window.location.pathname);
 
-  var negotiation = new Negotiation();
   var negotiations = new Negotiations();
-
+window.testing = negotiations;
   var negotiationListView = new NegotiationListView({collection: negotiations});
   var negotiationFormView= new NegotiationFormView({collection: negotiations});
 

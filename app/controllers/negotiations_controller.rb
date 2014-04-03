@@ -14,11 +14,12 @@ class NegotiationsController < ApplicationController
   end
 
   def retrieve_negotiations
-    @negotiation = Negotiation.where(params[:user_id])
+    @id = session[:user_id]
+    @negotiation = Negotiation.where(user_id: @id).last(5)
 
   	if @negotiation
   		respond_with do |format|
-  			format.json {render :json => @negotiation }
+  			format.json { render :json => @negotiation }
   			
   		end
   	end

@@ -1,26 +1,36 @@
 var NegotiationListView = Backbone.View.extend({
 	el: ".negotiationListView",
 
+	currentI: 0,
+
 	initialize: function(){
 		// this.render();
-		debugger
-		this.collection.on("reset sync", this.render, this);
+		
+		this.collection.on("sync", this.render, this);
+		this.collection.on('all', function(event){
+          console.log(event);
+
+            
+        });
+		// this.collection.on("add", this.addRender, this);
 	},
 
 	render: function(){
 		
-		for(var i = 0; i < this.collection.length; i++){
+		for(var i = this.currentI; i < this.collection.length; i++){
 			
 			var negotiationView = new NegotiationView({
 
-				model: this.collection[i]
+				model: this.collection.at(i)
 			});
-			debugger
+
+			this.currentI++;
+
 			$('.negotiationListView').append(negotiationView.render().el);
 		}
 	},
-
 });
+
 
 var NegotiationView = Backbone.View.extend({
 	className: "negotiation",
@@ -32,9 +42,22 @@ var NegotiationView = Backbone.View.extend({
 	},
 
 	render: function(){
-
-		console.log(this.model);
 		this.$el.html(this.template(this.model));
 		return this;
-	}
+	},
+
+	events:{
+		"click": "loadIssuePage",
+	},  
+
+  loadIssuePage: function(){	
+  	debugger
+  	
+    $('.negotiationListView').hide();
+  }
 });
+
+
+
+
+
