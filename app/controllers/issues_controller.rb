@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
 
 	def new_issue
 	  @issue = Issue.new(params[:issue])
-	  @issue.negotiation_id = session[:user_id]
+	  @issue.user_id = session[:user_id]
 
 	  if @issue.save
 	    respond_to do |format|

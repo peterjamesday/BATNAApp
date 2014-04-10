@@ -1,17 +1,16 @@
 var NegotiationFormView = Backbone.View.extend({
   el: '.negotiationFormView',
 
+  template: window.JST['backbone/templates/negotiationFormView'],
+
+  initialize: function(){
+    debugger
+    this.$el.html(this.template);
+    return this;
+  },
 
   events: {
   	'click .negotiation-submit': 'submitNegotiation'
-  },
-
-  negotiationAttributes: function(){
-  	return {
-      negotiation_name: $('.negotiationName').val(),
-      batna_name: $('.batnaName').val(),
-      batna_points: $('.batnaPoints').val(),
-  	}
   },
 
   submitNegotiation: function(event){

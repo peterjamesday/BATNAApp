@@ -3,32 +3,42 @@ var NegotiationListView = Backbone.View.extend({
 
 	currentI: 0,
 
+	template: window.JST['backbone/templates/negotiationListView'],
+
 	initialize: function(){
-		// this.render();
-		
 		this.collection.on("sync", this.render, this);
 		this.collection.on('all', function(event){
-          console.log(event);
-
-            
+          console.log(event);       
         });
-		// this.collection.on("add", this.addRender, this);
+		this.$el.append(this.template);
 	},
 
 	render: function(){
-		
-		for(var i = this.currentI; i < this.collection.length; i++){
+		var negotiations = new Negotiations();
+		if (this.collection.length > 0){
 			
-			var negotiationView = new NegotiationView({
-
-				model: this.collection.at(i)
-			});
-
-			this.currentI++;
-
-			$('.negotiationListView').append(negotiationView.render().el);
-		}
+			for(var i = this.currentI; i < this.collection.length; i++){
+				var negotiationView = new NegotiationView({
+					model: this.collection.at(i)
+				});
+				this.currentI++;
+				$('.negotiationListView').append(negotiationView.render().el);
+			}
+			
+			return this;
+	  } else {
+	  	var negotiationFormView = new NegotiationFormView({collection: negotiations});
+	  }
 	},
+
+	events:{
+    "click .newNegotiationButton": "newNegotiation",
+	},
+
+	newNegotiation: function(){
+		debugger
+		var negotiationFormView = new NegotiationFormView({collection: this.collection});
+	}
 });
 
 
@@ -51,8 +61,9 @@ var NegotiationView = Backbone.View.extend({
 	},  
 
   loadIssuePage: function(){	
-  	debugger
   	
+  	var issues = new Issues();
+  	var issuesView = new IssuesView({collection: issues, negotiation_id: this.model.id});
     $('.negotiationListView').hide();
   }
 });

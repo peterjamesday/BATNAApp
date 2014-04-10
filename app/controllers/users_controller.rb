@@ -18,11 +18,11 @@ class UsersController < ApplicationController
       create_user_session(@user)
       
 
-    else
+    # else
      
-       respond_to do |format|
-              format.json { render :json => {:error => "Invalid email or password."} }
-       end
+    #    respond_to do |format|
+    #           format.json { render :json => {:error => "Invalid email or password."} }
+    #    end
 
     end
 

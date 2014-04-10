@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_protected :password_digest
 
   has_many :negotiations
-  
+  has_many :issues
 
   validates :username, :presence => true
   validates :email, :presence => true, :uniqueness => true, :email => true
