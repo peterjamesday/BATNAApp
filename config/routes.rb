@@ -7,6 +7,8 @@ BatnaApp::Application.routes.draw do
   post "/negotiations/newnegotiation" => "negotiations#new_negotiation"
   post "/issues/newissue" => "issues#new_issue"
 
+  put "/negotiations/newnegotiation" => "negotiations#update_negotiation"
+
   match 'login'  => 'sessions#new', :via => :get
   match 'logout' => 'sessions#destroy', :via => [:get, :delete]
   match 'signup' => 'users#new', :via => :get

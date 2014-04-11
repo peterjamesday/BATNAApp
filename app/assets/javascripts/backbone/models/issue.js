@@ -17,7 +17,6 @@ var Issues = Backbone.Collection.extend({
   url: '/issues/retrieveissues',
 
   initialize: function(){
-
   	this.fetch();
   }
 });

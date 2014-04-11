@@ -1,9 +1,10 @@
 <div class="negotiation">
     <ul>
       <li>
-          <h1> <%= attributes.negotiation_name %></h1>
-          <h2> BATNA: <%= attributes.batna_name %></h2>
-          <h2> BATNA Points: <%= attributes.batna_points %></h2>
+          <h3><input class="negotiationName<%= attributes.id%>", value=<%= attributes.negotiation_name %>><span class="update">update</span></h3>
+          <h2 > BATNA:<span><input class= "batnaName<%= attributes.id%>", value=<%= attributes.batna_name %>></span></h2>
+          <h2> BATNA Points:<span><input class="batnaPoints<%= attributes.id%>", value=<%= attributes.batna_points %>></span></h2>
       </li>
     </ul>
+    <div class="loadIssuePage"><h3>negotiate!</h3></div>
 </div>

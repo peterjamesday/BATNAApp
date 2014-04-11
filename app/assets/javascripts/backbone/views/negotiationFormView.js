@@ -4,7 +4,6 @@ var NegotiationFormView = Backbone.View.extend({
   template: window.JST['backbone/templates/negotiationFormView'],
 
   initialize: function(){
-    debugger
     this.$el.html(this.template);
     return this;
   },

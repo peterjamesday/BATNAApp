@@ -8,9 +8,9 @@ var NegotiationListView = Backbone.View.extend({
 	initialize: function(){
 		this.collection.on("sync", this.render, this);
 		this.collection.on('all', function(event){
-          console.log(event);       
+          console.log("negotiations: " + event);       
         });
-		this.$el.append(this.template);
+		$(".newNegotiationButton").append(this.template);
 	},
 
 	render: function(){
@@ -24,7 +24,7 @@ var NegotiationListView = Backbone.View.extend({
 				this.currentI++;
 				$('.negotiationListView').append(negotiationView.render().el);
 			}
-			
+			var negotiationFormView = new NegotiationFormView({collection: negotiations});
 			return this;
 	  } else {
 	  	var negotiationFormView = new NegotiationFormView({collection: negotiations});
@@ -36,7 +36,6 @@ var NegotiationListView = Backbone.View.extend({
 	},
 
 	newNegotiation: function(){
-		debugger
 		var negotiationFormView = new NegotiationFormView({collection: this.collection});
 	}
 });
@@ -46,6 +45,8 @@ var NegotiationView = Backbone.View.extend({
 	className: "negotiation",
 
 	template: window.JST['backbone/templates/negotiation'],
+
+	changeNameTemplate: window.JST['backbone/templates/changeNameTemplate'],
 
 	initialize: function(){
 		this.render();
@@ -57,15 +58,25 @@ var NegotiationView = Backbone.View.extend({
 	},
 
 	events:{
-		"click": "loadIssuePage",
+		// "click .loadIssuePage": "loadIssuePage",
+		"click .update": "updateModel"
 	},  
 
-  loadIssuePage: function(){	
-  	
+  loadIssuePage: function(){		
   	var issues = new Issues();
   	var issuesView = new IssuesView({collection: issues, negotiation_id: this.model.id});
     $('.negotiationListView').hide();
+  },
+
+  updateModel: function(){
+  	debugger
+  	this.model.save({
+          negotiation_name: $('.negotiationName' + this.model.id).val(),
+          batna_name: $('.batnaName'+ this.model.id).val(),
+          batna_points: $('.batnaPoints'+ this.model.id).val(),
+    });
   }
+
 });
 
 

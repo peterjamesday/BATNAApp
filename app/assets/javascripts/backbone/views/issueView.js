@@ -3,6 +3,8 @@ var IssuesView = Backbone.View.extend({
 
   negotiation_id: 0,
 
+  currentI: 0,
+
   template: window.JST["backbone/templates/newIssues"],
 
   initialize: function(){
@@ -10,6 +12,28 @@ var IssuesView = Backbone.View.extend({
     	debugger
       this.negotiation_id = arguments[0].negotiation_id;
     }
+
+    // this.collection.on("sync", this.render, this);
+    this.collection.on('all', function(event){
+      console.log("issues: " + event);       
+    });
+  },
+
+  render: function(){
+    if (this.collection.length > 0){
+			for(var i = this.currentI; i < this.collection.length; i++){
+				var issueView = new issueView(
+					
+					// model: this.collection.at(i)
+				);
+				this.currentI++;
+				$('.issueView').append(issueView.render().el);
+			}
+			
+			return this;
+	  } else {
+	  	var issueFormView = new issueFormView({collection: issues});
+	  }
   },
 
   events: {

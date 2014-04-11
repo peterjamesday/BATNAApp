@@ -56,7 +56,7 @@ $(document).ready(function () {
   Router.route(window.location.pathname);
 
   var negotiations = new Negotiations();
-  var issues = new Issues();
+  // var issues = new Issues();
 
   var negotiationListView = new NegotiationListView({collection: negotiations});
   
