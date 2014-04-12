@@ -17,15 +17,15 @@ var NegotiationFormView = Backbone.View.extend({
    
     var self = this,
         negotiation = this.collection.create({
-          negotiation_name: $('.negotiationName').val(),
-          batna_name: $('.batnaName').val(),
-          batna_points: $('.batnaPoints').val(),
+          negotiation_name: $('.newnegotiationName').val(),
+          batna_name: $('.newbatnaName').val(),
+          batna_points: $('.newbatnaPoints').val(),
           },{
            success: function(response){
 
-            $('.negotiationName').val("");
-            $('.batnaName').val("");
-            $('.batnaPoints').val("");
+            $('.newnegotiationName').val("");
+            $('.newbatnaName').val("");
+            $('.newbatnaPoints').val("");
             $('.negotiationFormView').hide();
             $('.negotiationListView').show();
         // var issueView = new IssueView({model: this.model});

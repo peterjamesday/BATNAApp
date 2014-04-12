@@ -18,6 +18,7 @@ var NegotiationListView = Backbone.View.extend({
 		if (this.collection.length > 0){
 			
 			for(var i = this.currentI; i < this.collection.length; i++){
+
 				var negotiationView = new NegotiationView({
 					model: this.collection.at(i)
 				});
@@ -48,18 +49,25 @@ var NegotiationView = Backbone.View.extend({
 
 	changeNameTemplate: window.JST['backbone/templates/changeNameTemplate'],
 
+	timer: null,
+
 	initialize: function(){
 		this.render();
 	},
 
 	render: function(){
+
 		this.$el.html(this.template(this.model));
 		return this;
 	},
 
 	events:{
 		// "click .loadIssuePage": "loadIssuePage",
-		"click .update": "updateModel"
+		// "click .negotiationName": "changeNegotiationName",
+		// "click .batnaName": "changebatnaName",
+		// "click .batnaPoints": "changebatnaPoints",
+		"keyup": "autoSave",
+		"keydown": "delayAutoSave"
 	},  
 
   loadIssuePage: function(){		
@@ -68,13 +76,30 @@ var NegotiationView = Backbone.View.extend({
     $('.negotiationListView').hide();
   },
 
+  autoSave: function(event){
+  	var that = this;
+    this.timer= setTimeout(function(){
+    	that.updateModel();
+    }, 4000);
+    console.log("yes");
+  },
+ 
+  delayAutoSave: function(event){
+  	if(this.timer != null){
+      clearTimeout(this.timer);
+      console.log("no");
+      
+    }
+  },
+
   updateModel: function(){
-  	debugger
+ 
   	this.model.save({
           negotiation_name: $('.negotiationName' + this.model.id).val(),
           batna_name: $('.batnaName'+ this.model.id).val(),
-          batna_points: $('.batnaPoints'+ this.model.id).val(),
+          batna_points: $('.batnaPoints'+ this.model.id).val()
     });
+    console.log("saved!");
   }
 
 });
