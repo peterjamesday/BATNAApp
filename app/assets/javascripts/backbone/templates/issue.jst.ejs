@@ -1,3 +1,11 @@
-<h2>
-<%= issue_name %> <%= potential_points %>
-</h2>
+<div class="issue">
+    <ul>
+      <li>
+          <h2><input class="issueName<%= attributes.id%>", value="<%= attributes.issue_name %>"></h2>
+          <h3> Potential Points:  <span><input class= "potentialPoints<%= attributes.id%>", value=<%= attributes.potential_points %>></span></h3>
+          <h3> Issue Outcome:  <span><input class= "issueOutcome<%= attributes.id%>", value="<%= attributes.issue_outcome %>"></span></h3>
+          <h3> Issue Points:  <span><input class="issuePoints<%= attributes.id%>", value=<%= attributes.issue_points %>></span></h3>
+      </li>
+    </ul>
+    <div class="complete"><h3>completed?</h3></div>
+</div>

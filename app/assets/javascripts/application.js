@@ -59,7 +59,7 @@ $(document).ready(function () {
   // var issues = new Issues();
 
   var negotiationListView = new NegotiationListView({collection: negotiations});
-  
+  var negotiationFormView = new NegotiationFormView({collection: negotiations});
 
 });
 

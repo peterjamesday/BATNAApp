@@ -9,11 +9,10 @@ var IssuesView = Backbone.View.extend({
 
   initialize: function(){
     if (arguments[0].negotiation_id) {
-    	debugger
       this.negotiation_id = arguments[0].negotiation_id;
     }
-
-    // this.collection.on("sync", this.render, this);
+debugger
+    this.collection.on("sync", this.render, this);
     this.collection.on('all', function(event){
       console.log("issues: " + event);       
     });
@@ -22,6 +21,7 @@ var IssuesView = Backbone.View.extend({
   render: function(){
     if (this.collection.length > 0){
 			for(var i = this.currentI; i < this.collection.length; i++){
+				debugger
 				var issueView = new issueView(
 					
 					// model: this.collection.at(i)
@@ -60,7 +60,7 @@ var IssuesView = Backbone.View.extend({
 
 var IssueView = Backbone.View.extend({
 	className: "issue",
-	template: window.JST["issue"],
+	template: window.JST["backbone/templates/issue"],
 
 
 });

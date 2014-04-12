@@ -13,9 +13,9 @@ class IssuesController < ApplicationController
   end
 
   def retrieve_issues
-    @id = session[:negotiation_id]
+    @id = params[:negotiation_id]
     @issue = Issue.where(negotiation_id: @id).all
-
+binding.pry
   	if @issue
   		respond_with do |format|
   			format.json { render :json => @issue }

@@ -22,15 +22,10 @@ var NegotiationFormView = Backbone.View.extend({
           batna_points: $('.newbatnaPoints').val(),
           },{
            success: function(response){
-
             $('.newnegotiationName').val("");
             $('.newbatnaName').val("");
             $('.newbatnaPoints').val("");
-            $('.negotiationFormView').hide();
-            $('.negotiationListView').show();
-        // var issueView = new IssueView({model: this.model});
           }
         });
-        // new Negotiation(this.negotiationAttributes()); 
   }
 });
