@@ -17,7 +17,8 @@ var Issues = Backbone.Collection.extend({
   url: '/issues/retrieveissues',
 
   initialize: function(){
-  	this.fetch();
+    debugger
+  	this.fetch({data: $.param({negotiation_id: arguments[0].negotiation.get('id')})});
   }
 });
 

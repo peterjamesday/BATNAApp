@@ -5,13 +5,12 @@ var IssuesView = Backbone.View.extend({
 
   currentI: 0,
 
-  template: window.JST["backbone/templates/newIssues"],
-
   initialize: function(){
-    if (arguments[0].negotiation_id) {
-      this.negotiation_id = arguments[0].negotiation_id;
+  	
+    if (this.collection.models[0].get("negotiation").id) {
+      this.collection.negotiation_id = this.collection.models[0].get("negotiation").id;
     }
-debugger
+
     this.collection.on("sync", this.render, this);
     this.collection.on('all', function(event){
       console.log("issues: " + event);       
@@ -21,11 +20,11 @@ debugger
   render: function(){
     if (this.collection.length > 0){
 			for(var i = this.currentI; i < this.collection.length; i++){
-				debugger
-				var issueView = new issueView(
+				
+				var issueView = new IssueView({
 					
-					// model: this.collection.at(i)
-				);
+					  model: this.collection.at(i)
+				});
 				this.currentI++;
 				$('.issueView').append(issueView.render().el);
 			}
@@ -34,6 +33,36 @@ debugger
 	  } else {
 	  	var issueFormView = new issueFormView({collection: issues});
 	  }
+  }
+});
+
+
+
+var IssueView = Backbone.View.extend({
+	className: "issue",
+	template: window.JST["backbone/templates/issue"],
+
+  initialize: function(){
+    this.render();
+  },
+
+  render: function(){
+
+  	this.$el.html(this.template(this.model));
+  	return this;
+  }
+});
+
+
+
+var IssueFormView = Backbone.View.extend({
+  el: '.issueFormView',
+
+  template: window.JST["backbone/templates/newIssues"],
+
+  initialize: function(){
+    this.$el.html(this.template);
+    return this;
   },
 
   events: {
@@ -45,22 +74,15 @@ debugger
    debugger
     var self = this,
         issue = this.collection.create({
-          issue_name: $('.issueName').val(),
-          potential_points: $('.potentialPoints').val(),
-          negotiation_id: this.negotiation_id
+          issue_name: $('.newIssueName').val(),
+          potential_points: $('.newPotentialPoints').val(),
+          negotiation_id: this.collection.negotiation_id
           },{
            success: function(response){
 
-            $('.issueName').val("");
-            $('.potentialPoints').val("");
+            $('.newIssueName').val("");
+            $('.newPotentialPoints').val("");
           }
         });
   }
-});
-
-var IssueView = Backbone.View.extend({
-	className: "issue",
-	template: window.JST["backbone/templates/issue"],
-
-
 });

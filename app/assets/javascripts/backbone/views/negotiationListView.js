@@ -55,10 +55,12 @@ var NegotiationView = Backbone.View.extend({
 	},  
 
   loadIssuePage: function(){		
-  	var issues = new Issues();
-  	debugger
-  	var issuesView = new IssuesView({collection: issues, negotiation_id: this.model.id});
+  	var issues = new Issues({negotiation: this.model});
+  	var issuesView = new IssuesView({collection: issues});
+  	var issueFormView = new IssueFormView({collection: issues});
     $('.negotiationListView').hide();
+    $('.negotiationFormView').hide();
+    
   },
 
   autoSave: function(event){

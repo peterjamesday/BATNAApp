@@ -14,8 +14,8 @@ class IssuesController < ApplicationController
 
   def retrieve_issues
     @id = params[:negotiation_id]
-    @issue = Issue.where(negotiation_id: @id).all
-binding.pry
+    @issue = Issue.where(negotiation_id: @id).load
+
   	if @issue
   		respond_with do |format|
   			format.json { render :json => @issue }

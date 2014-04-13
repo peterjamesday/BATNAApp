@@ -21,7 +21,7 @@
 	background-color: gray;
 };*/
 
-.negotiation input{
+.issue input, .negotiation input{
 	background-color: transparent; 
 border-style: solid; 
 border-width: 0px 0px 0px 0px; 
@@ -30,7 +30,7 @@ font-family: baskerville;
 width: 70%;
 }
 
-.negotiation input:focus{
+.issue input:focus, .negotiation input:focus{
   outline:none;
   background-color: transparent; 
   border-style: solid; 
