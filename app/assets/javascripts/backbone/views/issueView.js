@@ -42,6 +42,8 @@ var IssueView = Backbone.View.extend({
 	className: "issue",
 	template: window.JST["backbone/templates/issue"],
 
+	timer: null,
+
   initialize: function(){
     this.render();
   },
@@ -50,6 +52,47 @@ var IssueView = Backbone.View.extend({
 
   	this.$el.html(this.template(this.model));
   	return this;
+  },
+
+  events:{
+  	"keyup": "autoSave",
+		"keydown": "delayAutoSave"
+  },
+
+  autoSave: function(event){
+  	var that = this;
+    this.timer= setTimeout(function(){
+    	that.updateModel();
+    }, 4000);
+  },
+
+  delayAutoSave: function(event){
+  	if(this.timer != null){
+      clearTimeout(this.timer); 
+    }
+  },
+
+  updateModel: function(){
+    var potentialPoints = $('.potentialPoints'+ this.model.id).val();
+    var issuePoints = $('.issuePoints'+ this.model.id).val();
+    
+  	this.model.save({
+          issue_name: $('.issueName' + this.model.id).val(),
+          issue_outcome: $('.issueOutcome'+ this.model.id).val(),
+          potential_points: this.stringToNum(potentialPoints),
+          issue_points: this.stringToNum(issuePoints)
+    });
+    console.log("saved!");
+  },
+
+  stringToNum: function(options){
+    var string = options
+       if(isNaN(parseInt(string))){
+       	debugger
+         return 0;
+       } else {
+       	return parseInt(string);
+       }
   }
 });
 
