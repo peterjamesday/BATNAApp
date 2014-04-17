@@ -1,9 +1,14 @@
 var IssuesView = Backbone.View.extend({
   el: '.issueView',
+  template: window.JST["backbone/templates/issueEval"],
 
   negotiation_id: 0,
 
   currentI: 0,
+
+  totalPotentialPoints: 0,
+
+  totalIssuePoints: 0,
 
   initialize: function(){
   	
@@ -18,6 +23,8 @@ var IssuesView = Backbone.View.extend({
   },
 
   render: function(){
+  	
+
     if (this.collection.length > 0){
 			for(var i = this.currentI; i < this.collection.length; i++){
 				
@@ -25,6 +32,10 @@ var IssuesView = Backbone.View.extend({
 					
 					  model: this.collection.at(i)
 				});
+				
+				this.totalIssuePoints += this.collection.models[i].get("issue_points");
+				this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+				
 				this.currentI++;
 				$('.issueView').append(issueView.render().el);
 			}
@@ -33,6 +44,16 @@ var IssuesView = Backbone.View.extend({
 	  } else {
 	  	var issueFormView = new issueFormView({collection: issues});
 	  }
+  },
+
+  events:{
+    "click .goBack": "goBack"
+  },
+
+  goBack: function(){
+  	$('.negotiationListView').show();
+    $('.negotiationFormView').show();
+    $('.issuesContainer').hide();
   }
 });
 
@@ -93,6 +114,20 @@ var IssueView = Backbone.View.extend({
        } else {
        	return parseInt(string);
        }
+  }
+});
+
+var IssueEvalView = Backbone.View.extend({
+  el: '.IssueEvalView',
+  template: window.JST["backbone/templates/issueEval"],
+
+  initialize: function(){
+  	this.render();
+  },
+
+  render: function(){
+  	this.$el.html(this.template());
+  	return this;
   }
 });
 

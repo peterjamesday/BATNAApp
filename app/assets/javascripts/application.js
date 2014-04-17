@@ -60,6 +60,7 @@ $(document).ready(function () {
 
   var negotiationListView = new NegotiationListView({collection: negotiations});
   var negotiationFormView = new NegotiationFormView({collection: negotiations});
+  
 
 });
 

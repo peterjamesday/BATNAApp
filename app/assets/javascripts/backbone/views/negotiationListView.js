@@ -55,11 +55,13 @@ var NegotiationView = Backbone.View.extend({
 	},  
 
   loadIssuePage: function(){		
+  	$('.negotiationListView').hide();
+    $('.negotiationFormView').hide();
+    $('.issuesContainer').show();
   	var issues = new Issues({negotiation: this.model});
   	var issuesView = new IssuesView({collection: issues});
   	var issueFormView = new IssueFormView({collection: issues});
-    $('.negotiationListView').hide();
-    $('.negotiationFormView').hide();
+    
     
   },
 
