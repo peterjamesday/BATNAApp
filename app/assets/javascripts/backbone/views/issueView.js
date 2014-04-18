@@ -139,12 +139,21 @@ var IssueEvalView = Backbone.View.extend({
   initialize: function(){
   	
   	this.render(arguments[0]);
+  	this.turnRed(arguments[0]);
   },
 
   render: function(el){
-  	debugger
+  	
   	this.$el.html(this.template(el));
   	return this;
+  },
+
+  turnRed: function(el){
+  	debugger
+    if(el.batnaPoints > el.issuePoints){
+debugger
+    	$(".issuePoints").css("color", "red");
+    }
   }
 });
 

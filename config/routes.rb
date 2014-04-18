@@ -19,6 +19,10 @@ BatnaApp::Application.routes.draw do
   resource :session, :only => [:new, :create, :destroy]
   resource :account, :controller => 'users', :except => [:index, :destroy, :show, :edit]
   resource :static_pages
+  resource :negotiations
+  resource :issues
+
+  # retrieve = show, use resources. scaffold generate a model controller in a new app and copy that
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
