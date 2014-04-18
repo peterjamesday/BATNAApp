@@ -1,6 +1,6 @@
 var IssuesView = Backbone.View.extend({
   el: '.issueView',
-  template: window.JST["backbone/templates/issueEval"],
+  template: window.JST["backbone/templates/issuesView"],
 
   negotiation_id: 0,
 
@@ -10,26 +10,31 @@ var IssuesView = Backbone.View.extend({
 
   totalIssuePoints: 0,
 
+  totalBatnaPoints: 0,
+
   initialize: function(){
   	
     if (this.collection.models[0].get("negotiation").id) {
       this.collection.negotiation_id = this.collection.models[0].get("negotiation").id;
+      this.totalBatnaPoints = this.collection.models[0].get("negotiation").get("batna_points");
     }
 
     this.collection.on("sync", this.render, this);
     this.collection.on('all', function(event){
       console.log("issues: " + event);       
     });
+
+    this.$el.html(this.template);
+    return this;
   },
 
   render: function(){
   	
 
     if (this.collection.length > 0){
+    	
 			for(var i = this.currentI; i < this.collection.length; i++){
-				
 				var issueView = new IssueView({
-					
 					  model: this.collection.at(i)
 				});
 				
@@ -39,6 +44,14 @@ var IssuesView = Backbone.View.extend({
 				this.currentI++;
 				$('.issueView').append(issueView.render().el);
 			}
+
+			var issueEvalView = new IssueEvalView({
+				batnaPoints: this.totalBatnaPoints,
+				issuePoints: this.totalIssuePoints,
+				potentialPoints: this.totalPotentialPoints
+			});
+
+		  $('.IssueView').append(issueEvalView.render().el);
 			
 			return this;
 	  } else {
@@ -54,7 +67,8 @@ var IssuesView = Backbone.View.extend({
   	$('.negotiationListView').show();
     $('.negotiationFormView').show();
     $('.issuesContainer').hide();
-  }
+  },
+
 });
 
 
@@ -70,7 +84,6 @@ var IssueView = Backbone.View.extend({
   },
 
   render: function(){
-
   	this.$el.html(this.template(this.model));
   	return this;
   },
@@ -117,16 +130,20 @@ var IssueView = Backbone.View.extend({
   }
 });
 
+
+
 var IssueEvalView = Backbone.View.extend({
-  el: '.IssueEvalView',
+  el: '.issueEvalView',
   template: window.JST["backbone/templates/issueEval"],
 
   initialize: function(){
-  	this.render();
+  	
+  	this.render(arguments[0]);
   },
 
-  render: function(){
-  	this.$el.html(this.template());
+  render: function(el){
+  	debugger
+  	this.$el.html(this.template(el));
   	return this;
   }
 });
