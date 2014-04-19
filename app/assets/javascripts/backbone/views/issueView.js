@@ -122,7 +122,6 @@ var IssueView = Backbone.View.extend({
   stringToNum: function(options){
     var string = options
        if(isNaN(parseInt(string))){
-       	debugger
          return 0;
        } else {
        	return parseInt(string);
@@ -149,7 +148,6 @@ var IssueEvalView = Backbone.View.extend({
   },
 
   turnRed: function(el){
-  	
     if(el.batnaPoints > el.issuePoints){
     	$(".issuePoints").css("color", "red");
     } else {
