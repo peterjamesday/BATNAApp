@@ -19,7 +19,7 @@ var IssuesView = Backbone.View.extend({
       this.totalBatnaPoints = this.collection.models[0].get("negotiation").get("batna_points");
     }
 
-    this.collection.on("sync", this.render, this);
+    this.collection.on("sync change:issue_points change:potential_points", this.render, this);
     this.collection.on('all', function(event){
       console.log("issues: " + event);       
     });
@@ -45,13 +45,15 @@ var IssuesView = Backbone.View.extend({
 				$('.issueView').append(issueView.render().el);
 			}
 
-			var issueEvalView = new IssueEvalView({
-				batnaPoints: this.totalBatnaPoints,
+      var evalObject = {
+      	batnaPoints: this.totalBatnaPoints,
 				issuePoints: this.totalIssuePoints,
 				potentialPoints: this.totalPotentialPoints
-			});
+      }
 
-		  $('.IssueView').append(issueEvalView.render().el);
+			var issueEvalView = new IssueEvalView(evalObject);
+
+		  $('.IssueView').append(issueEvalView.newRender(evalObject));
 			
 			return this;
 	  } else {
@@ -142,9 +144,14 @@ var IssueEvalView = Backbone.View.extend({
   },
 
   render: function(el){
+  	
   	  this.$el.html(this.template(el));
   	  return this;
    
+  },
+
+  newRender: function(e){
+    this.render(e);
   },
 
   turnRed: function(el){
