@@ -32,7 +32,7 @@ var IssuesView = Backbone.View.extend({
   	
 
     if (this.collection.length > 0){
-    	
+    	debugger
 			for(var i = this.currentI; i < this.collection.length; i++){
 				var issueView = new IssueView({
 					  model: this.collection.at(i)
@@ -51,9 +51,9 @@ var IssuesView = Backbone.View.extend({
 				potentialPoints: this.totalPotentialPoints
       }
 
-			var issueEvalView = new IssueEvalView(evalObject);
+			var issueEvalView = new IssueEvalView({collection: this.collection, evalObject: this.evalObject});
 
-		  $('.IssueView').append(issueEvalView.newRender(evalObject));
+		  $('.IssueView').append(issueEvalView.newRender({collection: this.collection, evalObject: this.evalObject}));
 			
 			return this;
 	  } else {
@@ -138,7 +138,7 @@ var IssueEvalView = Backbone.View.extend({
   template: window.JST["backbone/templates/issueEval"],
 
   initialize: function(){
-  	
+  	debugger
   	this.render(arguments[0]);
   	this.turnRed(arguments[0]);
   },
