@@ -32,7 +32,7 @@ var IssuesView = Backbone.View.extend({
   	
 
     if (this.collection.length > 0){
-    	debugger
+    	
 			for(var i = this.currentI; i < this.collection.length; i++){
 				var issueView = new IssueView({
 					  model: this.collection.at(i)
@@ -51,10 +51,10 @@ var IssuesView = Backbone.View.extend({
 				potentialPoints: this.totalPotentialPoints
       }
 
-			var issueEvalView = new IssueEvalView({collection: this.collection, evalObject: this.evalObject});
+			var issueEvalView = new IssueEvalView({collection: this.collection, evalObject: evalObject});
 
-		  $('.IssueView').append(issueEvalView.newRender({collection: this.collection, evalObject: this.evalObject}));
-			
+		  $('.IssueView').append(issueEvalView.newRender({collection: this.collection, evalObject: evalObject}));
+			this.currentI = 0;
 			return this;
 	  } else {
 	  	var issueFormView = new issueFormView({collection: issues});
@@ -71,6 +71,38 @@ var IssuesView = Backbone.View.extend({
     $('.issuesContainer').hide();
   },
 
+});
+
+
+
+var IssueEvalView = Backbone.View.extend({
+  el: '.issueEvalView',
+  template: window.JST["backbone/templates/issueEval"],
+
+  initialize: function(options){
+  	
+  	this.render(options.evalObject);
+  	this.turnRed(options.evalObject);
+  },
+
+  render: function(options){
+  	
+  	  this.$el.html(this.template(options));
+  	  return this;
+   
+  },
+
+  newRender: function(options){
+    this.render(options);
+  },
+
+  turnRed: function(options){
+    if(options.batnaPoints > options.issuePoints){
+    	$(".issuePoints").css("color", "red");
+    } else {
+    	$(".issuePoints").css("color", "green");
+    }
+  }
 });
 
 
@@ -128,38 +160,6 @@ var IssueView = Backbone.View.extend({
        } else {
        	return parseInt(string);
        }
-  }
-});
-
-
-
-var IssueEvalView = Backbone.View.extend({
-  el: '.issueEvalView',
-  template: window.JST["backbone/templates/issueEval"],
-
-  initialize: function(){
-  	debugger
-  	this.render(arguments[0]);
-  	this.turnRed(arguments[0]);
-  },
-
-  render: function(el){
-  	
-  	  this.$el.html(this.template(el));
-  	  return this;
-   
-  },
-
-  newRender: function(e){
-    this.render(e);
-  },
-
-  turnRed: function(el){
-    if(el.batnaPoints > el.issuePoints){
-    	$(".issuePoints").css("color", "red");
-    } else {
-    	$(".issuePoints").css("color", "green");
-    }
   }
 });
 
