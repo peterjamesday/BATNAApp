@@ -38,23 +38,25 @@ var IssuesView = Backbone.View.extend({
 					  model: this.collection.at(i)
 				});
 				
-				this.totalIssuePoints += this.collection.models[i].get("issue_points");
-				this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+				// this.totalIssuePoints += this.collection.models[i].get("issue_points");
+				// this.totalPotentialPoints += this.collection.models[i].get("potential_points");
 				
 				this.currentI++;
 				$('.issueView').append(issueView.render().el);
 			}
 
-      var evalObject = {
-      	batnaPoints: this.totalBatnaPoints,
-				issuePoints: this.totalIssuePoints,
-				potentialPoints: this.totalPotentialPoints
-      }
+    //   var evalObject = {
+    //   	batnaPoints: this.totalBatnaPoints,
+				// issuePoints: this.totalIssuePoints,
+				// potentialPoints: this.totalPotentialPoints
+    //   }
+      
+      var evalObject = this.addPoints();
 
 			var issueEvalView = new IssueEvalView({collection: this.collection, evalObject: evalObject});
 
 		  $('.IssueView').append(issueEvalView.newRender({collection: this.collection, evalObject: evalObject}));
-			this.currentI = 0;
+			
 			return this;
 	  } else {
 	  	var issueFormView = new issueFormView({collection: issues});
@@ -63,6 +65,20 @@ var IssuesView = Backbone.View.extend({
 
   events:{
     "click .goBack": "goBack"
+  },
+
+  addPoints: function(){
+    for(var i = 0; i < this.collection.length; i++){
+    	this.totalIssuePoints += this.collection.models[i].get("issue_points");
+			this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+    }
+
+    var evalObject = {
+      	batnaPoints: this.totalBatnaPoints,
+				issuePoints: this.totalIssuePoints,
+				potentialPoints: this.totalPotentialPoints
+      }
+    return evalObject;  
   },
 
   goBack: function(){
@@ -81,19 +97,20 @@ var IssueEvalView = Backbone.View.extend({
 
   initialize: function(options){
   	
-  	this.render(options.evalObject);
-  	this.turnRed(options.evalObject);
+  	// this.render(options.evalObject);
+  	// this.turnRed(options.evalObject);
   },
 
   render: function(options){
-  	
+  	debugger
   	  this.$el.html(this.template(options));
   	  return this;
    
   },
 
   newRender: function(options){
-    this.render(options);
+  	
+    this.render(options.evalObject);
   },
 
   turnRed: function(options){
