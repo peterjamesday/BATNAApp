@@ -19,7 +19,7 @@ var IssuesView = Backbone.View.extend({
       this.totalBatnaPoints = this.collection.models[0].get("negotiation").get("batna_points");
     }
 
-    this.collection.on("sync change:issue_points change:potential_points", this.render, this);
+    this.collection.on("sync", this.render, this);
     this.collection.on('all', function(event){
       console.log("issues: " + event);       
     });
@@ -38,18 +38,11 @@ var IssuesView = Backbone.View.extend({
 					  model: this.collection.at(i)
 				});
 				
-				// this.totalIssuePoints += this.collection.models[i].get("issue_points");
-				// this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+			
 				
 				this.currentI++;
 				$('.issueView').append(issueView.render().el);
 			}
-
-    //   var evalObject = {
-    //   	batnaPoints: this.totalBatnaPoints,
-				// issuePoints: this.totalIssuePoints,
-				// potentialPoints: this.totalPotentialPoints
-    //   }
       
       var evalObject = this.addPoints();
 
@@ -59,7 +52,7 @@ var IssuesView = Backbone.View.extend({
 			
 			return this;
 	  } else {
-	  	var issueFormView = new issueFormView({collection: issues});
+	  	// var issueFormView = new issueFormView({collection: issues});
 	  }
   },
 
@@ -68,6 +61,9 @@ var IssuesView = Backbone.View.extend({
   },
 
   addPoints: function(){
+    this.totalIssuePoints = 0;
+    this.totalPotentialPoints = 0;
+
     for(var i = 0; i < this.collection.length; i++){
     	this.totalIssuePoints += this.collection.models[i].get("issue_points");
 			this.totalPotentialPoints += this.collection.models[i].get("potential_points");
@@ -97,13 +93,14 @@ var IssueEvalView = Backbone.View.extend({
 
   initialize: function(options){
   	
-  	// this.render(options.evalObject);
-  	// this.turnRed(options.evalObject);
+  	this.render(options.evalObject);
+  	
   },
 
   render: function(options){
-  	debugger
+  	
   	  this.$el.html(this.template(options));
+      this.turnRed(options);
   	  return this;
    
   },
@@ -114,9 +111,11 @@ var IssueEvalView = Backbone.View.extend({
   },
 
   turnRed: function(options){
+	
     if(options.batnaPoints > options.issuePoints){
     	$(".issuePoints").css("color", "red");
-    } else {
+    } else { 
+    	
     	$(".issuePoints").css("color", "green");
     }
   }
@@ -198,8 +197,7 @@ var IssueFormView = Backbone.View.extend({
 
   submitIssue: function(event){
     event.preventDefault(); 
-   debugger
-    var self = this,
+   
         issue = this.collection.create({
           issue_name: $('.newIssueName').val(),
           potential_points: $('.newPotentialPoints').val(),
