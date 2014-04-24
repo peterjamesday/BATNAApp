@@ -40,4 +40,8 @@ class NegotiationsController < ApplicationController
   		end
   	end
   end
+
+  def destroy
+    Negotiation.destroy(params[:negotiation]["id"])
+  end
 end

@@ -38,4 +38,8 @@ class IssuesController < ApplicationController
   		end
   	end
   end
+
+  def destroy
+    Issue.destroy(params[:issue]["id"])
+  end
 end

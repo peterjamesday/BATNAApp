@@ -197,7 +197,7 @@ var IssueFormView = Backbone.View.extend({
 
   submitIssue: function(event){
     event.preventDefault(); 
-   
+   debugger
         issue = this.collection.create({
           issue_name: $('.newIssueName').val(),
           potential_points: $('.newPotentialPoints').val(),

@@ -3,7 +3,7 @@
 Agenda:
 
 1. use resources in routing
-2. auto-update the evaluator in number and color
+
 3. mobile design
 4. destroy issues and negotiations
 5. archive issues and negotiations
