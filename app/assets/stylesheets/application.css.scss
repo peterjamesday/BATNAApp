@@ -23,11 +23,15 @@
 
 .issue input, .issueEval, .negotiation input{
 	background-color: transparent; 
-border-style: solid; 
-border-width: 0px 0px 0px 0px; 
-font-size: 1em;
-font-family: baskerville;
-width: 70%;
+  border-style: solid; 
+  border-width: 0px 0px 0px 0px; 
+  font-size: 1em;
+  font-family: baskerville;
+  width: 65%;
+}
+
+input.batnaPoints{
+    width: 20%;
 }
 
 .issue input:focus, .negotiation input:focus{
@@ -43,6 +47,27 @@ width: 70%;
   display:none;
 }
 
+.negotiationListView{
+  width: 100%;
+}
+
+.negotiation{
+  float: none;
+  width: 100%;
+}
+
+.left-gutter{
+  float: left;
+
+}
+
+.loadIssuePage{
+  float: left;
+  margin-top: 4%;
+  font-size: 3em;
+  margin-left: -1em;
+}
+
 li {
     list-style-type: none;
 }
@@ -53,7 +78,7 @@ li {
 
 /*  Media Queries  */
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 400px){
 
 
 }
