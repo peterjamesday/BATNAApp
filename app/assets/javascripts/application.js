@@ -17,6 +17,7 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require marionette
+//= require bootstrap
 //= require_tree ./backbone/templates
 //= require_tree .
 
