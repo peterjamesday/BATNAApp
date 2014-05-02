@@ -16,13 +16,13 @@ class UsersController < ApplicationController
       flash[:notice] = 'Account created.'
 
       create_user_session(@user)
-      
+      redirect_to :static_pages
 
-    # else
-     
-    #    respond_to do |format|
-    #           format.json { render :json => {:error => "Invalid email or password."} }
-    #    end
+    else
+     redirect_to :back
+       # respond_to do |format|
+       #        format.json { render :json => {:error => "Invalid email or password."} }
+       # end
 
     end
 

@@ -81,6 +81,8 @@ var IssuesView = Backbone.View.extend({
   	$('.negotiationListView').show();
     $('.negotiationFormView').show();
     $('.issuesContainer').hide();
+
+    //remove event handlers from issues
   },
 
 });
