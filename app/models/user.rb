@@ -1,26 +1,30 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :password
-  attr_protected :password_digest
+  attr_protected :encrypted_password
 
   has_many :negotiations
   has_many :issues
 
-  validates :username, :presence => true
+  # validates :username, :presence => true
   validates :email, :presence => true, :uniqueness => true, :email => true
   validates :password, :presence => true, :confirmation => true
-  validates :password_confirmation, :presence => { :if => :password }
+  # validates :password_confirmation, :presence => { :if => :password }
 
 
   def self.authenticate(email, pass)
     user = where(:email => email).first
-    user && BCrypt::Password.new(user.password_digest) == pass ? user : nil
+    user && BCrypt::Password.new(user.encrypted_password) == pass ? user : nil
   end
 
   def password=(pass)
     return if pass.blank?
     @password = pass
-    self.password_digest = BCrypt::Password.create(pass)
+    self.encrypted_password = BCrypt::Password.create(pass)
   end
 
 

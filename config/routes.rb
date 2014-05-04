@@ -1,4 +1,5 @@
 BatnaApp::Application.routes.draw do
+  devise_for :users, controllers: {sessions: "devise/sessions"}
   root :to => "static_pages#index"
 
   get "/negotiations/retrievenegotiations" => "negotiations#retrieve_negotiations"
@@ -10,10 +11,10 @@ BatnaApp::Application.routes.draw do
   put "/negotiations/newnegotiation" => "negotiations#update_negotiation"
   put "/issues/newissue" => "issues#update_issue"
 
-  match 'login'  => 'sessions#new', :via => :get
-  match 'logout' => 'sessions#destroy', :via => [:get, :delete]
-  match 'signup' => 'users#new', :via => :get
-  match 'new' => 'static_pages#new', :via => :get
+  match 'sign_in'  => 'sessions#new', :via => :get
+  # match 'logout' => 'sessions#destroy', :via => [:get, :delete]
+  match 'sign_up' => 'users#new', :via => :get
+  match 'new' => 'devise/sessions#new', :via => :get
   
 
   resource :session, :only => [:new, :create, :destroy]

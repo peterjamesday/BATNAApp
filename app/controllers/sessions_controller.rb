@@ -3,11 +3,16 @@ class SessionsController < ApplicationController
   respond_to :html, :json
 
   def create
-    @user = User.authenticate(params[:email], params[:password])
+  
+    
+    @user = User.authenticate(params[:user][:email], params[:user][:password])
 
     if @user
       create_user_session(@user)
-      respond_with @user, :location => '/', :notice => "Login succesful."
+     
+      sign_in(@user)
+      redirect_to '/'
+      # respond_with @user, :location => '/', :notice => "Login succesful."
     else
       respond_to do |format|
         format.html { render 'new' }
@@ -20,5 +25,9 @@ class SessionsController < ApplicationController
     destroy_user_session
     redirect_to '/login', :notice => "Logged out."
   end
+
+
+
+
 
 end
