@@ -82,7 +82,7 @@ var IssuesView = Backbone.View.extend({
     $('.negotiationFormView').show();
     $('.issuesContainer').hide();
 
-    //remove event handlers from issues
+    //remove event handlers from issues chNGE
   },
 
 });
