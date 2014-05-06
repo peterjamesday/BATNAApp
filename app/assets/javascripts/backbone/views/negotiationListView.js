@@ -61,7 +61,7 @@ var NegotiationView = Backbone.View.extend({
   	var issues = new Issues({negotiation: this.model});
   	var issuesView = new IssuesView({collection: issues});
   	var issueFormView = new IssueFormView({collection: issues});
-    
+    this.stopListening();
     
   },
 

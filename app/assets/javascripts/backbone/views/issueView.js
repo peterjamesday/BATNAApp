@@ -15,6 +15,7 @@ var IssuesView = Backbone.View.extend({
   initialize: function(){
   	
     if (this.collection.models[0].get("negotiation").id) {
+      
       this.collection.negotiation_id = this.collection.models[0].get("negotiation").id;
       this.totalBatnaPoints = this.collection.models[0].get("negotiation").get("batna_points");
     }
@@ -52,6 +53,7 @@ var IssuesView = Backbone.View.extend({
 			
 			return this;
 	  } else {
+      this.addPoints();
 	  	// var issueFormView = new issueFormView({collection: issues});
 	  }
   },
@@ -63,10 +65,14 @@ var IssuesView = Backbone.View.extend({
   addPoints: function(){
     this.totalIssuePoints = 0;
     this.totalPotentialPoints = 0;
-
-    for(var i = 0; i < this.collection.length; i++){
-    	this.totalIssuePoints += this.collection.models[i].get("issue_points");
-			this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+    if(this.collection.length > 0){
+      for(var i = 0; i < this.collection.length; i++){
+      	this.totalIssuePoints += this.collection.models[i].get("issue_points");
+  			this.totalPotentialPoints += this.collection.models[i].get("potential_points");
+      }
+    } else {
+      this.totalIssuePoints = 0;
+      this.totalPotentialPoints = 0;
     }
 
     var evalObject = {
@@ -81,8 +87,8 @@ var IssuesView = Backbone.View.extend({
   	$('.negotiationListView').show();
     $('.negotiationFormView').show();
     $('.issuesContainer').hide();
-
-    //remove event handlers from issues chNGE
+    this.stopListening();
+    //remove event handlers from issues 
   },
 
 });
@@ -149,7 +155,7 @@ var IssueView = Backbone.View.extend({
   	var that = this;
     this.timer= setTimeout(function(){
     	that.updateModel();
-    }, 4000);
+    }, 2000);
   },
 
   delayAutoSave: function(event){
@@ -199,7 +205,7 @@ var IssueFormView = Backbone.View.extend({
 
   submitIssue: function(event){
     event.preventDefault(); 
-   debugger
+   
         issue = this.collection.create({
           issue_name: $('.newIssueName').val(),
           potential_points: $('.newPotentialPoints').val(),
