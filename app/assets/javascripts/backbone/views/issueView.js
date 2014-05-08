@@ -89,6 +89,7 @@ var IssuesView = Backbone.View.extend({
     $('.issuesContainer').hide();
     this.stopListening();
     //remove event handlers from issues 
+    //this is something
   },
 
 });
