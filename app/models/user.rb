@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   has_many :negotiations
   has_many :issues
 
-  # validates :username, :presence => true
+ 
   validates :email, :presence => true, :uniqueness => true, :email => true
   validates :password, :presence => true, :confirmation => true
-  # validates :password_confirmation, :presence => { :if => :password }
+ 
 
 
   def self.authenticate(email, pass)

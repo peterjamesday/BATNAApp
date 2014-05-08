@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
      
       sign_in(@user)
       redirect_to '/'
-      # respond_with @user, :location => '/', :notice => "Login succesful."
+     
     else
       respond_to do |format|
         format.html { render 'new' }

@@ -20,9 +20,7 @@ class UsersController < ApplicationController
 
     else
      redirect_to :back
-       # respond_to do |format|
-       #        format.json { render :json => {:error => "Invalid email or password."} }
-       # end
+       
 
     end
 

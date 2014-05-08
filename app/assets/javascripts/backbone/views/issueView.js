@@ -54,7 +54,7 @@ var IssuesView = Backbone.View.extend({
 			return this;
 	  } else {
       this.addPoints();
-	  	// var issueFormView = new issueFormView({collection: issues});
+	  	
 	  }
   },
 
@@ -88,8 +88,7 @@ var IssuesView = Backbone.View.extend({
     $('.negotiationFormView').show();
     $('.issuesContainer').hide();
     this.stopListening();
-    //remove event handlers from issues 
-    //this is something
+    
   },
 
 });
