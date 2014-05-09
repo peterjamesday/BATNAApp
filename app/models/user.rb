@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
  
   validates :email, :presence => true, :uniqueness => true, :email => true
   validates :password, :presence => true, :confirmation => true
- 
+ ##
 
 
   def self.authenticate(email, pass)
