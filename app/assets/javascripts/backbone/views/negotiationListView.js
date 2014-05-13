@@ -92,7 +92,6 @@ var NegotiationView = Backbone.View.extend({
   stringToNum: function(options){
     var string = options
        if(isNaN(parseInt(string))){
-       	debugger
          return 0;
        } else {
        	return parseInt(string);

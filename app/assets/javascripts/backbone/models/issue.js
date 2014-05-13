@@ -19,10 +19,7 @@ var Issues = Backbone.Collection.extend({
   initialize: function(options){
     
   	this.fetch({data: $.param({negotiation_id: options.negotiation.get('id')})});
-  },
-
-  calculateWhatever: function(){
-    // loop through collection
   }
+
 });
 
