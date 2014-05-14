@@ -4,7 +4,6 @@ class StaticPagesController < ApplicationController
 
   def index
   	@current_user = current_user
-  	
   	@logged_in = true
   end
 
