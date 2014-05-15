@@ -21,7 +21,7 @@ class NegotiationsController < ApplicationController
     @negotiation.negotiation_name = params[:negotiation]["negotiation_name"]
     @negotiation.batna_name = params[:negotiation]["batna_name"]
     @negotiation.batna_points = params[:negotiation]["batna_points"]
-   
+  
     if @negotiation.save
       respond_to do |format|
         format.json { render :json => @negotiation }
@@ -36,7 +36,6 @@ class NegotiationsController < ApplicationController
   	if @negotiation
   		respond_with do |format|
   			format.json { render :json => @negotiation }
-  			
   		end
   	end
   end
