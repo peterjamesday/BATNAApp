@@ -14,20 +14,12 @@ class UsersController < ApplicationController
               format.json { render :json => @user }
       end
       flash[:notice] = 'Account created.'
-
       create_user_session(@user)
       redirect_to :static_pages
 
     else
      redirect_to :back
-       
-
     end
-
   end
-
-  
-
-
 
 end
